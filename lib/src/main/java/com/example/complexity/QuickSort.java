@@ -8,7 +8,7 @@ import java.util.Random;
 public class QuickSort {
     public static void main(String[] args) {
 //        int[] arr = {2, 3, 5, 8, 9, 11, 1, 4, 7, 12, 18};
-        int len = 100;
+        int len = 3;
         int[] arr = new int[len];
         Random random = new Random();
         for (int i = 0; i < len; i++) {
@@ -41,11 +41,10 @@ public class QuickSort {
 
 
     private static void qSort(int[] arr, int left, int right) {
-        int cutOff = 8;
+        int cutOff = 268;
         int pivot;
         int low;
         int high;
-        int temp;
         if (cutOff <= right - left) {
             pivot = medianIn3(arr, left, right);
             low = left;
@@ -66,14 +65,7 @@ public class QuickSort {
             qSort(arr, low + 1, right);
 
         } else {
-            int i;
-            for (int p = left; p < right - left + 1; p++) {
-                temp = arr[p];
-                for (i = p; i > 0 && arr[i - 1] > temp; i--) {
-                    arr[i] = arr[i - 1];
-                }
-                arr[i] = temp;
-            }
+            insertionSort(arr, left, right + 1);
         }
     }
 
@@ -89,6 +81,23 @@ public class QuickSort {
         qSort(arr, 0, arr.length - 1);
         long end = System.currentTimeMillis();
         System.out.println("mergeArrToArr coast time:" + (end - start));
+    }
+
+
+    public static void insertionSort(int[] arr, int left, int right) {
+
+        int temp;
+        int i;
+        int p;
+        for (p = left; p < right; p++) {
+            temp = arr[p];
+            for (i = p; i > 0 && arr[i - 1] > temp; i--) {
+                arr[i] = arr[i - 1];
+            }
+
+            arr[i] = temp;
+        }
+
     }
 
 
